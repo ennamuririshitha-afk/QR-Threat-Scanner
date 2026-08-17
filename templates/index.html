@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Threat Scanner</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <header class="hero">
+
+        <i class="fa-solid fa-shield-halved logo-icon"></i>
+
+        <h1>QR THREAT SCANNER</h1>
+
+        <p>
+            AI Powered Cyber Security Scanner for QR Codes
+        </p>
+
+    </header>
+
+    <!-- Upload Card -->
+
+    <div class="upload-box">
+
+        <h2>
+            <i class="fa-solid fa-qrcode"></i>
+            Scan Your QR Code
+        </h2>
+
+        <form action="/scan" method="POST" enctype="multipart/form-data">
+
+            <label class="upload-label">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                <br><br>
+
+                Choose QR Code Image
+
+                <input
+                    type="file"
+                    name="qr_image"
+                    accept="image/*"
+                    required>
+
+            </label>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Analyze QR Code
+
+            </button>
+            <a href="/about">
+    <button>
+        <i class="fa-solid fa-circle-info"></i>
+        About Project
+    </button>
+</a>
+
+        </form>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="features">
+
+        <div class="card">
+
+            <i class="fa-solid fa-shield-virus"></i>
+
+            <h3>Threat Detection</h3>
+
+            <p>
+                Detect phishing websites and malicious QR codes.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <h3>HTTPS Verification</h3>
+
+            <p>
+                Checks whether the website uses a secure HTTPS connection.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <h3>Risk Analysis</h3>
+
+            <p>
+                AI analyzes suspicious keywords, IP addresses and unsafe URLs.
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h3>Risk Score</h3>
+
+            <p>
+                Generates a risk score from 0 (Safe) to 100 (Critical).
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <p>
+
+            <i class="fa-solid fa-shield"></i>
+
+            QR Threat Scanner | Cyber Security Project
+
+        </p>
+
+    </footer>
+
+</div>
+
+</body>
+
+</html>
