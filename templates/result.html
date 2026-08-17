@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cyber Threat Analysis Report</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+<script>
+window.qrUrl = "{{ qr_data }}";
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<body>
+
+<div class="container">
+
+<header class="logo">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<h1>Cyber Threat Analysis Report</h1>
+
+<p>AI Powered QR Code Security Scanner</p>
+
+</header>
+
+<div class="report">
+
+<!-- Decoded QR -->
+
+<div class="report-card">
+
+<h2>
+
+<i class="fa-solid fa-qrcode"></i>
+
+Decoded QR Content
+
+</h2>
+
+<p class="decoded">
+
+{{ qr_data }}
+
+</p>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="dashboard">
+
+<div class="info-card">
+
+<i class="fa-solid fa-gauge-high"></i>
+
+<h3>Risk Score</h3>
+
+<h1>
+
+{{ score }}/100
+
+</h1>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-shield-virus"></i>
+
+<h3>Threat Level</h3>
+
+<h2>
+
+{{ level }}
+
+</h2>
+
+</div>
+
+<div class="info-card">
+
+<i class="fa-solid fa-link"></i>
+
+<h3>QR Type</h3>
+
+{% if is_url %}
+
+<h2>Website</h2>
+
+{% else %}
+
+<h2>Plain Text</h2>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- Analysis Summary -->
+
+<div class="report-card">
+
+<h2>
+
+<i class="fa-solid fa-circle-info"></i>
+
+Analysis Summary
+
+</h2>
+
+<table class="summary-table">
+
+<tr>
+
+<td>Scan Status</td>
+
+<td>Completed ✅</td>
+
+</tr>
+
+<tr>
+
+<td>QR Decoded</td>
+
+<td>Successful</td>
+
+</tr>
+
+<tr>
+
+<td>Threat Analysis</td>
+
+<td>Completed</td>
+
+</tr>
+
+<tr>
+
+<td>Risk Score</td>
+
+<td>{{ score }}/100</td>
+
+</tr>
+
+<tr>
+
+<td>Threat Level</td>
+
+<td>{{ level }}</td>
+
+</tr>
+
+<tr>
+
+<td>Content Type</td>
+
+<td>
+
+{% if is_url %}
+
+Website URL
+
+{% else %}
+
+Plain Text
+
+{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+<!-- Threat Indicators -->
+
+<div class="report-card">
+
+<h2>
+
+<i class="fa-solid fa-bug"></i>
+
+Threat Indicators
+
+</h2>
+
+<ul>
+
+{% for reason in reasons %}
+
+<li>{{ reason }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<!-- Website Action -->
+
+{% if is_url %}
+
+<div class="report-card">
+
+<h2>
+
+<i class="fa-solid fa-globe"></i>
+
+Website Access
+
+</h2>
+
+{% if score <= 20 %}
+
+<p class="safe">
+
+✅ This website appears safe based on our analysis.
+
+</p>
+
+<div style="text-align:center;margin-top:25px;">
+
+<a href="{{ qr_data }}" target="_blank">
+
+<button class="safe-btn">
+
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+Open Website
+
+</button>
+
+</a>
+
+</div>
+
+{% else %}
+
+<p class="danger">
+
+⚠ This website may be suspicious.
+
+Proceed only if you trust the source.
+
+</p>
+
+<div style="text-align:center;margin-top:25px;">
+
+<button class="danger-btn" onclick="showWarning()">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+Continue to Website
+
+</button>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endif %}
+
+
+<!-- Scan Again -->
+
+<div style="text-align:center;margin-top:35px;">
+
+<a href="/">
+
+<button>
+
+<i class="fa-solid fa-rotate-left"></i>
+
+Scan Another QR
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Warning Popup -->
+
+<div id="warningModal" class="modal">
+
+<div class="modal-content">
+
+<h2>
+
+⚠ Security Warning
+
+</h2>
+
+<p>
+
+Our AI security engine found suspicious indicators in this website.
+
+<br><br>
+
+Opening it may expose you to:
+
+<br><br>
+
+• Phishing attacks<br>
+
+• Malware downloads<br>
+
+• Fake login pages<br>
+
+• Credential theft
+
+<br><br>
+
+Do you want to continue?
+
+</p>
+
+<div class="modal-buttons">
+
+<button class="danger-btn" onclick="continueOpen()">
+
+Continue Anyway
+
+</button>
+
+<button onclick="closeWarning()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function showWarning(){
+
+document.getElementById("warningModal").style.display="flex";
+
+}
+
+function closeWarning(){
+
+document.getElementById("warningModal").style.display="none";
+
+}
+
+function continueOpen(){
+
+window.open("{{ qr_data }}","_blank");
+
+}
+
+</script>
+
+</body>
+
+</html>
